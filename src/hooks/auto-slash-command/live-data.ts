@@ -142,8 +142,9 @@ export function resetSecurityPolicy(): void {
 
 function checkSecurity(command: string): { allowed: boolean; reason?: string } {
   const policy = loadSecurityPolicy();
+  const cmdBase = command.split(WHITESPACE_SPLIT_PATTERN)[0];
 
-  // Check denied patterns first
+  // Check denied patterns first (always enforced)
   if (policy.denied_patterns) {
     for (const pat of policy.denied_patterns) {
       try {
@@ -157,36 +158,50 @@ function checkSecurity(command: string): { allowed: boolean; reason?: string } {
   }
 
   if (policy.denied_commands) {
-    const cmdBase = command.split(WHITESPACE_SPLIT_PATTERN)[0];
     if (policy.denied_commands.includes(cmdBase)) {
       return { allowed: false, reason: `command '${cmdBase}' is denied` };
     }
   }
 
-  if (policy.allowed_commands && policy.allowed_commands.length > 0) {
-    const cmdBase = command.split(WHITESPACE_SPLIT_PATTERN)[0];
-    const baseAllowed = policy.allowed_commands.includes(cmdBase);
-    let patternAllowed = false;
+  // Default-deny: if an allowlist is configured, command MUST match it
+  // If no allowlist is configured at all, deny by default for safety
+  const hasAllowlist =
+    (policy.allowed_commands && policy.allowed_commands.length > 0) ||
+    (policy.allowed_patterns && policy.allowed_patterns.length > 0);
 
-    if (policy.allowed_patterns) {
-      for (const pat of policy.allowed_patterns) {
-        try {
-          if (new RegExp(pat).test(command)) {
-            patternAllowed = true;
-            break;
-          }
-        } catch {
-          // skip invalid regex
+  if (!hasAllowlist) {
+    return {
+      allowed: false,
+      reason: `no allowlist configured - command execution blocked by default`,
+    };
+  }
+
+  // Check if command matches allowlist
+  let baseAllowed = false;
+  let patternAllowed = false;
+
+  if (policy.allowed_commands) {
+    baseAllowed = policy.allowed_commands.includes(cmdBase);
+  }
+
+  if (policy.allowed_patterns) {
+    for (const pat of policy.allowed_patterns) {
+      try {
+        if (new RegExp(pat).test(command)) {
+          patternAllowed = true;
+          break;
         }
+      } catch {
+        // skip invalid regex
       }
     }
+  }
 
-    if (!baseAllowed && !patternAllowed) {
-      return {
-        allowed: false,
-        reason: `command '${cmdBase}' not in allowlist`,
-      };
-    }
+  if (!baseAllowed && !patternAllowed) {
+    return {
+      allowed: false,
+      reason: `command '${cmdBase}' not in allowlist`,
+    };
   }
 
   return { allowed: true };
