@@ -1,3 +1,66 @@
+# oh-my-claudecode v4.7.5: Runtime Guardrails & Model Default Cleanup
+
+## Release Notes
+
+Patch release that lands the post-v4.7.4 stabilization work on `dev`: safer orchestration guardrails, fail-open team stop enforcement, and centralized model defaults.
+
+### Bug Fixes
+
+- **fix(models): centralize defaults and remove outdated hardcoded mappings** — Consolidates model defaults into a single source of truth so runtime, config, and team flows stop drifting on stale hardcoded values. (#1376)
+- **fix: add context guardrails for agent orchestration** — Adds stronger orchestration context checks so agent/runtime flows fail earlier and more predictably when state is invalid. (#1373)
+- **fix(hooks): fail-open team stop enforcement and add breaker** — Makes team stop-hook enforcement safer under failure by failing open and adding a breaker to avoid deadlocks or runaway blocking. (#1374)
+- **test: fix no-undef process in post-tool-verifier test** — Repairs the verifier regression test so CI stays green with the updated orchestration guardrails.
+
+### Build
+
+- **chore: sync `main` into `dev` and rebuild dist artifacts** — Merged the v4.7.4 release lineage back into `dev`, then rebuilt committed bridge/runtime/dist outputs for v4.7.5.
+
+### Install / Update
+
+```bash
+npm install -g oh-my-claude-sisyphus@4.7.5
+```
+
+Or reinstall the plugin:
+```bash
+claude /install-plugin oh-my-claudecode
+```
+
+**Full Changelog**: https://github.com/Yeachan-Heo/oh-my-claudecode/compare/v4.7.4...v4.7.5
+
+---
+
+# oh-my-claudecode v4.7.4: Team Worker Hardening & CI Improvements
+
+## Release Notes
+
+Patch release focused on hardening Team worker orchestration, mailbox/task interop, and release validation ergonomics.
+
+### Features
+
+- **feat(team): harden worker guardrails and task/mailbox interop** — Strengthens worker lifecycle protections, mailbox/task handling, CLI interop, and state-path coverage for tmux-backed Team execution.
+
+### CI & Release
+
+- **chore(ci): retrigger PR workflows** — Refreshes CI after the worker-hardening changes landed.
+- **chore(ci): add manual workflow_dispatch triggers** — Adds manual triggers for CI workflows so maintainers can rerun validation on demand during release prep.
+- **chore: rebuild dist artifacts** — Rebuilt committed bridge/runtime/team outputs for the worker-hardening release cut.
+
+### Install / Update
+
+```bash
+npm install -g oh-my-claude-sisyphus@4.7.4
+```
+
+Or reinstall the plugin:
+```bash
+claude /install-plugin oh-my-claudecode
+```
+
+**Full Changelog**: https://github.com/Yeachan-Heo/oh-my-claudecode/compare/v4.7.3...v4.7.4
+
+---
+
 # oh-my-claudecode v4.7.1: Team Stability Fixes
 
 ## Release Notes
