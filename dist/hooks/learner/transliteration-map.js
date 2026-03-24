@@ -23,9 +23,6 @@ const KOREAN_MAP = {
     // === deep-pipeline skill ===
     "deep-pipeline": ["딥파이프라인", "딥 파이프라인"],
     "deep-pipe": ["딥파이프"],
-    "pipeline-cycle": ["파이프라인 사이클"],
-    "dev-pipeline": ["개발 파이프라인"],
-    "dev-cycle": ["개발 사이클"],
 };
 /**
  * Expand an array of lowercase English triggers to include Korean transliterations.
