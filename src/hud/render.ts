@@ -461,11 +461,12 @@ export async function render(
   const gitElements = collectInline(effectiveLayout.line1);
   const elements = collectInline(effectiveLayout.main);
 
-  // Detail lines: from the detail group + detail parts of line1/main elements (e.g., agents multiline)
+  // Detail lines: line1/main details first (e.g., agents multiline), then detail group.
+  // This preserves legacy ordering where agent detail lines appear before contextWarning/todos.
   const detailLines = [
-    ...collectDetailLines(effectiveLayout.detail),
     ...collectDetailLines(effectiveLayout.line1),
     ...collectDetailLines(effectiveLayout.main),
+    ...collectDetailLines(effectiveLayout.detail),
   ];
 
   // Compose output
