@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baby Zu · Music Timeline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">Release · US Schedule</div>
+  <h1>
+    <img src="assets/img/baby-zu-logo.svg" alt="Baby Zu" class="header-logo">
+  </h1>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-swatch legend-swatch--weekday"></div>
+      <span>Weekday song</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch legend-swatch--weekend"></div>
+      <span>Weekend song</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch legend-swatch--noupload"></div>
+      <span>Weekend day (no upload)</span>
+    </div>
+  </div>
+</header>
+
+<div class="months-grid" id="grid"></div>
+
+<footer>60 songs · 10-song cycle × 6</footer>
+
+<div id="save-group">
+  <button id="save-btn" class="save-btn" type="button">Save</button>
+  <p id="last-updated" class="last-updated"></p>
+</div>
+<div id="save-toast" class="save-toast" hidden>Saved!</div>
+
+<!-- Before-leave save modal -->
+<div id="save-modal-overlay" class="save-modal-overlay" hidden>
+  <div class="save-modal" role="dialog" aria-modal="true">
+    <button id="save-modal-close" class="modal-close" type="button" aria-label="Close">&times;</button>
+    <h2>You have unsaved changes</h2>
+    <p>Save your schedule before leaving, or discard the changes.</p>
+    <div id="save-modal-content" class="modal-content"></div>
+    <div class="modal-actions">
+      <button id="save-modal-cancel" type="button" class="modal-btn modal-btn--ghost">Stay & edit</button>
+      <button id="save-modal-discard" type="button" class="modal-btn modal-btn--danger">Discard</button>
+      <button id="save-modal-save" type="button" class="modal-btn modal-btn--primary">Save & leave</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/timeline.js"></script>
+</body>
+</html>

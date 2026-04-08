@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open /Users/novie/Desktop/ClaudeCode/baby-zu-timeline.html)",
+      "Bash(code ~/.claude/settings.json)",
+      "Bash(open:*)",
+      "WebSearch",
+      "WebFetch(domain:openrouter.ai)",
+      "WebFetch(domain:claude.ai)",
+      "Bash(curl -sL -o /tmp/claude_downloads.html -H 'Cookie: sessionKey=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' -H 'User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36' https://claude.ai/downloads)",
+      "Bash(echo \"Status: $?\")",
+      "Read(//tmp/**)",
+      "Bash(node:*)",
+      "Bash(python3:*)"
+    ]
+  }
+}

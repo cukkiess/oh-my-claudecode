@@ -1,0 +1,1319 @@
+/* =========================================================
+   CLAUDE DOWNLOADS — Pixel-Perfect CSS
+   ========================================================= */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-page:   hsl(27 5% 15%);
+  --bg-co:     hsl(27 5% 20%);
+  --bg-ci:     hsl(28 4% 19%);
+  --t1:        hsl(45 20% 97%);
+  --t2:        hsl(45 6% 72%);
+  --td:        hsl(45 5% 50%);
+  --bc:        hsla(40 6% 60% / .12);
+  --bi:        hsla(40 6% 60% / .07);
+  --bi2:       hsla(40 6% 60% / .15);
+  --grn:       hsl(135 55% 48%);
+  --red:       hsl(0 62% 54%);
+  --ora:       hsl(30 72% 58%);
+  --blu:       hsl(210 55% 58%);
+  --badge-bg:  hsl(210 22% 28%);
+  --badge-c:   hsl(210 48% 64%);
+  --dr: #FF5F57; --dy: #FEBC2E; --dg: #28C840;
+  --R: 22px;
+  --fs: "DM Serif Display", Georgia, serif;
+  --fn: "Instrument Sans", "Inter", system-ui, sans-serif;
+  --fm: "SF Mono", Menlo, "Fira Code", monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--fn);
+  background: var(--bg-page);
+  color: var(--t1);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+#root {
+  position: fixed; inset: 0; z-index: 50;
+  display: flex; flex-direction: column;
+  background: var(--bg-page);
+}
+
+/* ---- Close ---- */
+.close-btn {
+  position: absolute; top: 10px; right: 12px; z-index: 60;
+  width: 30px; height: 30px;
+  border: none; border-radius: 5px;
+  background: transparent; color: var(--td);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.close-btn:hover { background: hsla(40 6% 60% / .07); color: var(--t2); }
+
+/* ---- Content ---- */
+.page-content {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-start;
+  padding: 16px 16px 48px;
+  overflow-y: auto;
+}
+
+.page-content::-webkit-scrollbar { width: 0; }
+
+.hero-title {
+  font-family: var(--fs);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 3.2vw, 1.75rem);
+  color: var(--t1);
+  text-align: center;
+  margin-bottom: 28px;
+  line-height: 1.22;
+}
+
+/* ---- Grid ---- */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+@media (min-width: 700px) { .cards-grid { max-width: 860px; } }
+@media (min-width: 940px) { .cards-grid { max-width: 1040px; grid-template-columns: 1fr 1fr; } }
+
+/* ========================================================
+   CARD
+   ======================================================== */
+.card {
+  border-radius: var(--R);
+  background: var(--bg-co);
+  border: 1px solid var(--bc);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .45s ease-out, transform .45s ease-out;
+}
+.card.visible { opacity: 1; transform: translateY(0); }
+
+/* Card glow ring effect */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(var(--R) + 1px);
+  border: 0.5px solid hsla(0 0% 100% / .06);
+  pointer-events: none;
+}
+
+.card-office { grid-column: 1 / -1; }
+.card-office .card-pad {
+  background: linear-gradient(162deg, transparent 30%, hsla(120 55% 35% / .08) 85%);
+}
+
+.card-pad {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card top area */
+.card-top {
+  padding: 14px 16px 12px;
+}
+
+.card-title3 {
+  font-family: var(--fn);
+  font-weight: 600;
+  font-size: 1.02rem;
+  color: var(--t1);
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 4px;
+}
+
+.card-desc3 {
+  font-size: .83rem;
+  color: var(--t2);
+  line-height: 1.5;
+}
+.card-desc3 strong { color: var(--t1); font-weight: 600; }
+
+/* New badge */
+.badge-new {
+  display: inline-flex; align-items: center;
+  padding: 1px 8px; border-radius: 10px;
+  font-size: .67rem; font-weight: 600;
+  background: var(--badge-bg); color: var(--badge-c);
+}
+
+/* ========================================================
+   BUTTONS
+   ======================================================== */
+
+/* White button (Office install) */
+.btn-white {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 0 14px; height: 32px; border-radius: 8px;
+  font-family: var(--fn); font-weight: 500; font-size: .8rem;
+  color: #1a1a1a; background: var(--t1); border: none;
+  cursor: pointer; transition: transform .12s;
+  white-space: nowrap; flex-shrink: 0;
+}
+.btn-white:hover { transform: scale(1.04); }
+.btn-white:active { transform: scale(.96); }
+
+/* Outline download btn */
+.btn-outline {
+  display: inline-flex; align-items: center;
+  padding: 0 14px; height: 34px; border-radius: 8px;
+  font-family: var(--fn); font-weight: 500; font-size: .8rem;
+  color: var(--t1); background: transparent;
+  border: 1px solid var(--bi2); cursor: pointer;
+  transition: all .2s; white-space: nowrap;
+  align-self: flex-start; margin-top: 14px;
+}
+.btn-outline:hover { background: hsla(40 6% 60% / .05); }
+
+/* Small outline btn */
+.btn-outline-sm {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 0 10px; height: 28px; border-radius: 6px;
+  font-family: var(--fn); font-weight: 500; font-size: .73rem;
+  color: var(--t1); background: transparent;
+  border: 1px solid var(--bi2); cursor: pointer;
+  transition: all .2s; white-space: nowrap; flex-shrink: 0;
+}
+.btn-outline-sm:hover { background: hsla(40 6% 60% / .05); }
+
+/* Arrow */
+.arr { font-size: .68rem; opacity: .5; }
+
+/* ========================================================
+   OFFICE CARD — 1:1
+   ======================================================== */
+.office-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 940px) {
+  .office-layout {
+    grid-template-columns: minmax(240px, 270px) 1fr;
+  }
+}
+
+.office-left {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.office-list {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.office-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 10px;
+  border-top: .5px solid var(--bi);
+}
+
+.office-item-left {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.office-item-name {
+  font-size: .83rem; color: var(--t2);
+}
+
+/* Office right: Excel background + overlays */
+.office-right {
+  position: relative;
+  min-height: 300px;
+  padding: 12px 14px 14px 10px;
+}
+
+/* Excel window — background layer, z-index 1, fills area */
+.excel-win {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  background: hsl(28 4% 13%);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.25);
+  border: .5px solid var(--bi);
+  position: relative;
+  z-index: 1;
+}
+
+.excel-tb {
+  display: flex; align-items: center; gap: 12px;
+  padding: 5px 10px;
+  background: hsl(28 4% 18%);
+  border-bottom: .5px solid var(--bi);
+}
+
+.wdots { display: flex; gap: 5px; flex-shrink: 0; }
+.dr { width: 8px; height: 8px; border-radius: 50%; background: var(--dr); }
+.dy { width: 8px; height: 8px; border-radius: 50%; background: var(--dy); }
+.dg { width: 8px; height: 8px; border-radius: 50%; background: var(--dg); }
+
+.ex-ribbon {
+  display: flex; gap: 1px; overflow-x: auto; flex: 1;
+}
+
+.rtab {
+  font-size: .54rem; padding: 2px 5px; color: var(--td);
+  white-space: nowrap;
+}
+.rtab.active {
+  background: rgba(22,207,78,.1);
+  color: var(--grn);
+  border-radius: 3px;
+}
+
+/* Excel grid */
+.excel-gr {
+  height: calc(100% - 34px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.gr-hdr {
+  display: grid;
+  grid-template-columns: .7fr 1.3fr .85fr;
+  background: hsl(28 4% 16%);
+  border-bottom: .5px solid var(--bi);
+  position: sticky; top: 0; z-index: 2;
+}
+
+.gr-row {
+  display: grid;
+  grid-template-columns: .7fr 1.3fr .85fr;
+  border-bottom: .5px solid hsla(40 6% 60% / .04);
+  min-height: 20px;
+}
+.gr-row.hl {
+  background: rgba(100,160,255,.08);
+}
+
+.gc {
+  font-size: .53rem;
+  padding: 2px 6px;
+  display: flex; align-items: center;
+  color: var(--t2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hc {
+  font-size: .57rem;
+  font-weight: 600;
+  color: var(--t1);
+  background: rgba(22,207,78,.08);
+}
+
+.code {
+  font-family: var(--fm);
+  font-size: .55rem;
+  color: hsl(210 50% 70%);
+  font-weight: 500;
+}
+
+.muted {
+  color: var(--td);
+  font-size: .5rem;
+}
+
+.excel-gr::-webkit-scrollbar { width: 3px; }
+.excel-gr::-webkit-scrollbar-track { background: transparent; }
+.excel-gr::-webkit-scrollbar-thumb { background: hsla(40 6% 60% / .08); border-radius: 2px; }
+
+/* ---- Prompt bubble (OVER Excel, z-index 10) ---- */
+.prompt-bubble {
+  position: absolute;
+  top: 8px; right: 8px;
+  background: hsl(28 4% 23%);
+  border: .5px solid var(--bi);
+  border-radius: 10px;
+  padding: 8px 13px;
+  max-width: 165px;
+  font-size: .7rem;
+  line-height: 1.4;
+  color: var(--t1);
+  box-shadow: 0 4px 24px rgba(0,0,0,.3);
+  z-index: 10;
+}
+
+/* ---- Claude response (OVER Excel, z-index 9) ---- */
+.claude-response {
+  position: absolute;
+  left: 10px;
+  top: 52px;
+  z-index: 9;
+  background: hsl(30 3% 13%);
+  border: .5px solid var(--bi);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,.35);
+  width: 160px;
+}
+
+.claude-res-header {
+  display: flex; align-items: center; gap: 7px;
+  padding: 8px 10px;
+  border-bottom: .5px solid var(--bi);
+}
+
+/* Search orb with ripple ring */
+.search-orb {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ora);
+  position: relative;
+  flex-shrink: 0;
+  animation: orbPulse 1.4s ease-in-out infinite;
+}
+.search-orb::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ora);
+  opacity: 0;
+  animation: orbRipple 2s ease-out infinite;
+}
+
+@keyframes orbPulse {
+  0%, 100% { opacity: .35; transform: scale(.8); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+@keyframes orbRipple {
+  0% { transform: scale(.8); opacity: .5; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.search-label {
+  font-size: .68rem;
+  color: var(--ora);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.claude-clist {
+  padding: 3px 0;
+}
+
+.cc-item {
+  display: flex; align-items: center; gap: 6px;
+  padding: 3px 8px;
+  font-size: .64rem;
+  color: var(--t2);
+}
+
+.cc-item img {
+  width: 13px; height: 13px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.cc-item .bar {
+  width: 12px; height: 3px;
+  border-radius: 2px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.cc-item .bar.up      { background: var(--grn); }
+.cc-item .bar.down    { background: var(--red); }
+.cc-item .bar.neutral { background: transparent; }
+
+/* Responsive: mobile stacks */
+@media (max-width: 939px) {
+  .prompt-bubble { position: relative; top: auto; right: auto; max-width: none; margin-bottom: 8px; }
+  .claude-response { position: relative; left: auto; top: auto; width: auto; margin-bottom: 10px; }
+}
+
+/* ========================================================
+   COWORK CARD — 1:1
+   ======================================================== */
+.cowork-vis {
+  position: relative;
+  padding: 0 0 0px;
+  min-height: 300px;
+  overflow: hidden;
+}
+
+/* Square line grid */
+.cowork-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(hsla(0 0% 100% / .05) 1px, transparent 1px),
+    linear-gradient(90deg, hsla(0 0% 100% / .05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border-radius: 0 0 12px 12px;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 30%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%);
+}
+
+/* Scene Layouts */
+.cw-scene {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.cw-scene > * {
+  pointer-events: auto;
+}
+
+.cw-scene-1 { top: 0; left: 0; }
+.cw-scene-2 { top: 0; left: 0; }
+.cw-scene-3 { top: 0; left: 0; }
+
+/* Interactive Graphic Wrapper */
+.cw-interactive-graphic {
+  position: absolute;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+
+.cw-scene-1 .cw-interactive-graphic {
+  top: 28%;
+  left: 12%;
+}
+
+.cw-scene-2 .cw-interactive-graphic {
+  top: 44%;
+  right: 8%;
+  transform: translateX(-50%);
+}
+
+/* Graphic Content (Images) */
+.cw-graphic-content {
+  position: relative;
+  z-index: 1;
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+
+.cw-icon {
+  width: 52px;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.3));
+}
+
+.cw-receipts-fan {
+  display: flex;
+  gap: 0;
+  position: relative;
+}
+.cw-receipts-fan .receipt-fan-item {
+  width: 80px;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.3));
+}
+.cw-receipts-fan .receipt-fan-item.receipt-angle-1 {
+  position: absolute;
+  left: -12px; top: 4px;
+  transform: rotate(15deg);
+  opacity: .7;
+  width: 50px;
+}
+.cw-receipts-fan .receipt-fan-item.receipt-angle-2 {
+  position: absolute;
+  left: -6px; top: -2px;
+  transform: rotate(-8deg);
+  opacity: .85;
+  width: 50px;
+}
+
+/* Play Button — Hidden by default, revealed on hover */
+.cw-play-btn {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid hsla(0 0% 100% / .15);
+  background: hsla(0 0% 20% / .75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(.85);
+  transition: all .25s cubic-bezier(.22, 1, .36, 1);
+  z-index: 10;
+  box-shadow: 0 2px 12px rgba(0,0,0,.4);
+  pointer-events: auto;
+}
+
+/* Hover Interaction: Shift graphic, reveal play button */
+.cw-interactive-graphic:hover .cw-graphic-content {
+  transform: translate(4px, -4px);
+}
+
+.cw-interactive-graphic:hover .cw-play-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cw-receipts {
+  position: absolute;
+  z-index: 1;
+  top: 44%;
+  right: 8%;
+}
+.cw-receipts img {
+  width: 80px;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.3));
+  animation: receiptFloat 5s ease-in-out infinite;
+}
+.cw-receipts img + img {
+  position: absolute;
+  left: -12px; top: 4px;
+  transform: rotate(15deg);
+  opacity: .7;
+  width: 50px;
+}
+.cw-receipts img + img + img {
+  left: -6px; top: -2px;
+  transform: rotate(-8deg);
+  opacity: .85;
+}
+
+@keyframes folderFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(-1deg); }
+}
+@keyframes receiptFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-2px) rotate(2deg); }
+}
+
+/* Glassmorphism bubbles (dark glass, border, subtle shadow) */
+.cw-bubble {
+  position: absolute;
+  z-index: 3;
+  background: hsla(0 0% 8% / .45);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  border: 1px solid hsla(0 0% 100% / .08);
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: .82rem;
+  color: var(--t1);
+  line-height: 1.4;
+  box-shadow:
+    0 4px 24px rgba(0,0,0,.3),
+    inset 0 1px 0 hsla(0 0% 100% / .04);
+  max-width: 220px;
+  opacity: 0;
+  pointer-events: auto;
+}
+
+/* Bubble 1 — folder mess */
+.cw-b1 {
+  top: 22%;
+  left: 18%;
+  animation: glassIn .5s cubic-bezier(.22,1,.36,1) 1s forwards;
+}
+
+/* Bubble 2 — receipts */
+.cw-b2 {
+  top: 44%;
+  right: 6%;
+  max-width: 200px;
+  animation: glassIn .5s cubic-bezier(.22,1,.36,1) 1.3s forwards;
+}
+
+/* Bubble 3 — shopping with browser */
+.cw-b3 {
+  top: 68%;
+  left: 10%;
+  max-width: 250px;
+  padding: 12px 16px 16px;
+  animation: glassIn .5s cubic-bezier(.22,1,.36,1) 1.6s forwards;
+}
+
+.cw-b3 span {
+  display: block;
+  margin-bottom: 10px;
+}
+
+@keyframes glassIn {
+  from { opacity: 0; transform: translateY(10px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Browser mockup inside bubble 3 */
+.cw-browser {
+  background: hsl(0 0% 6%);
+  border-radius: 8px;
+  border: 1px solid hsla(0 0% 100% / .06);
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.4);
+}
+
+.cw-browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  background: hsl(0 0% 10%);
+  border-bottom: 1px solid hsla(0 0% 100% / .06);
+}
+
+.cw-url {
+  font-size: .55rem;
+  color: hsla(0 0% 100% / .4);
+  font-family: var(--fm);
+}
+
+.cw-produce {
+  display: flex;
+  gap: 2px;
+  padding: 6px;
+  background: hsl(0 0% 8%);
+}
+.cw-produce img {
+  width: 56px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 4px;
+  opacity: 0;
+  animation: produceIn .4s cubic-bezier(.22,1,.36,1) forwards;
+}
+.cw-produce img:nth-child(1) { animation-delay: 2s; }
+.cw-produce img:nth-child(2) { animation-delay: 2.2s; }
+.cw-produce img:nth-child(3) { animation-delay: 2.4s; }
+
+@keyframes produceIn {
+  from { opacity: 0; transform: translateY(6px) scale(.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ========================================================
+   VIDEO MODAL
+   ======================================================== */
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.video-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.video-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: hsla(0 0% 0% / .6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.video-modal-content {
+  position: relative;
+  z-index: 1;
+  width: min(800px, 90vw);
+  max-width: 800px;
+  background: hsl(28 4% 14%);
+  border-radius: 16px;
+  border: 1px solid var(--bi);
+  box-shadow: 0 24px 80px rgba(0,0,0,.5);
+  transform: scale(.95);
+  transition: transform .35s cubic-bezier(.22,1,.36,1);
+  overflow: hidden;
+}
+
+.video-modal.active .video-modal-content {
+  transform: scale(1);
+}
+
+.video-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: hsla(0 0% 20% / .7);
+  backdrop-filter: blur(8px);
+  color: var(--t2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s;
+}
+.video-modal-close:hover {
+  background: hsla(0 0% 30% / .8);
+  color: var(--t1);
+}
+
+.video-modal-player {
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+}
+
+.video-placeholder {
+  text-align: center;
+}
+
+.video-placeholder img {
+  opacity: .35;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,.3));
+}
+
+.video-placeholder p {
+  color: var(--td);
+}
+
+/* ========================================================
+   CLAUDE CODE CARD
+   ======================================================== */
+.code-list {
+  padding: 0 16px;
+}
+
+.code-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 8px;
+  gap: 10px;
+}
+
+.cr-left {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.cr-name {
+  font-size: .83rem; color: var(--t2);
+}
+
+/* List dividers for code card */
+.code-divs .code-row + .code-row {
+  border-top: .5px solid var(--bi);
+}
+
+/* Apple icon for mobile */
+.apple-m {
+  display: flex; align-items: center; color: var(--t1);
+}
+
+/* ========================================================
+   TERMINAL MOCKUP
+   ======================================================== */
+.term-vis {
+  padding: 10px 16px 16px;
+  position: relative;
+}
+
+.term-win {
+  background: hsl(28 3% 14%);
+  border-radius: 8px;
+  border: .5px solid var(--bi);
+  box-shadow: 0 4px 20px rgba(0,0,0,.2);
+  overflow: hidden;
+}
+
+.term-tb {
+  padding: 8px 12px;
+  border-bottom: .5px solid var(--bi);
+}
+
+.term-body {
+  padding: 12px 16px;
+  font-family: var(--fm);
+}
+
+.term-line {
+  font-size: .7rem;
+  line-height: 1.7;
+  display: flex; gap: 6px;
+}
+
+.term-prompt { color: var(--td); }
+.term-cmd { color: var(--t1); }
+
+.term-thinking { margin-top: 4px; }
+.think-star { color: var(--ora); }
+.think-text { color: var(--ora); }
+
+.think-dots span {
+  animation: blinkD 1.4s step-end infinite;
+}
+.think-dots span:nth-child(2) { animation-delay: .2s; }
+.think-dots span:nth-child(3) { animation-delay: .4s; }
+
+@keyframes blinkD {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Pixel art */
+.pixel-art {
+  position: absolute;
+  bottom: 16px; right: 16px;
+  opacity: .7;
+}
+
+/* ========================================================
+   MOBILE + CHROME
+   ======================================================== */
+.code-divs-mobile .code-row + .code-row {
+  border-top: .5px solid var(--bi);
+}
+
+/* ========================================================
+   ANIMATIONS — Full Page
+   ======================================================== */
+
+/* ---- 1. Page fade-in (root element) ---- */
+#root {
+  animation: pageFadeIn .6s ease-out both;
+}
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---- 2. Hero title slide-up on load ---- */
+.hero-title {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: heroSlideUp .7s cubic-bezier(.22,1,.36,1) .15s both;
+}
+@keyframes heroSlideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- 3. Card staggered entrance ---- */
+/* The .card class starts invisible (opacity:0, translateY).
+   The JS adds .visible after a staggered delay.
+   But we also add an auto-animation as a CSS fallback. */
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- 4. Close button subtle hover glow ---- */
+.close-btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 7px;
+  background: hsla(40 6% 60% / .08);
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+.close-btn:hover::before { opacity: 1; }
+
+/* ---- 5. Button press micro-interaction ---- */
+.btn-white,
+.btn-outline-sm,
+.btn-outline {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-white::after,
+.btn-outline-sm::after,
+.btn-outline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+    hsla(0 0% 100% / .15), transparent 60%);
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+}
+
+.btn-white:hover::after,
+.btn-outline-sm:hover::after,
+.btn-outline:hover::after {
+  opacity: 1;
+}
+
+/* ---- 6. Excel row highlight sweep ---- */
+.gr-row.hl {
+  animation: rowGlow 3s ease-in-out infinite alternate;
+}
+@keyframes rowGlow {
+  0%   { background: hsla(210 22% 28% / .08); }
+  100% { background: hsla(210 22% 28% / .18); }
+}
+
+/* ---- 7. Excel grid auto-scroll ---- */
+.excel-gr {
+  animation: excelScroll 30s linear 2s infinite;
+}
+@keyframes excelScroll {
+  0%, 80%, 100% { transform: translateY(0); }
+  40%           { transform: translateY(-120px); }
+  50%           { transform: translateY(-120px); }
+}
+
+/* Pause scroll on hover */
+.excel-gr:hover {
+  animation-play-state: paused;
+}
+
+/* ---- 8. Claude response list items appear one-by-one ---- */
+.cc-item {
+  opacity: 0;
+  transform: translateX(-6px);
+  animation: listReveal .4s cubic-bezier(.22,1,.36,1) forwards;
+}
+.cc-item:nth-child(1) { animation-delay: .8s; }
+.cc-item:nth-child(2) { animation-delay: 1.1s; }
+.cc-item:nth-child(3) { animation-delay: 1.4s; }
+.cc-item:nth-child(4) { animation-delay: 1.7s; }
+.cc-item:nth-child(5) { animation-delay: 2.0s; }
+.cc-item:nth-child(6) { animation-delay: 2.3s; }
+
+@keyframes listReveal {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Keep items visible after animation completes */
+.cc-item { animation-iteration-count: 1; animation-fill-mode: both; }
+
+/* After the staggered reveal, pulse them with a shimmer */
+.cc-item:nth-child(even) {
+  animation: listReveal .4s cubic-bezier(.22,1,.36,1) forwards,
+             listShimmer 4s ease-in-out 3s infinite;
+}
+@keyframes listShimmer {
+  0%, 100% { background: transparent; }
+  50%      { background: hsla(40 6% 60% / .04); }
+}
+
+/* ---- 9. Search orb — Claude-style pulsing ring ---- */
+.search-orb {
+  position: relative;
+}
+.search-orb::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ora);
+  opacity: 0;
+  animation: orbRipple 2s ease-out infinite;
+}
+@keyframes orbRipple {
+  0%   { transform: scale(.8); opacity: .6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes orbPulse {
+  0%, 100% { opacity: .4; transform: scale(.75); }
+  50%      { opacity: 1; transform: scale(1.15); }
+}
+
+/* ---- 10. Prompt bubble fade-in + slide ---- */
+.prompt-bubble {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: bubbleIn .5s cubic-bezier(.22,1,.36,1) .5s forwards;
+}
+@keyframes bubbleIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- 11. Claude response panel fade-up ---- */
+.claude-response {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: resPanelIn .6s cubic-bezier(.22,1,.36,1) .6s forwards;
+}
+@keyframes resPanelIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- 12. Excel window slide-right entrance ---- */
+.excel-win {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: slideRight .6s cubic-bezier(.22,1,.36,1) .4s forwards;
+}
+@keyframes slideRight {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ---- 13. Cowork task bubbles — staggered float in ---- */
+.cowork-bubble, .task-bubble {
+  opacity: 0;
+  animation: cbFadeIn .5s cubic-bezier(.22,1,.36,1) forwards,
+             floatB 5s ease-in-out infinite;
+}
+
+/* Stagger the bubbles */
+.tb1, .cw1 .task-bubble, .cwb.cw1 {
+  animation-delay: 1s, 1.5s;
+}
+.tb2, .cw2 .task-bubble, .cwb.cw2 {
+  animation-delay: 1.3s, 1.8s;
+}
+.tb3, .cw3 .task-bubble, .cwb.cw3 {
+  animation-delay: 1.6s, 2.1s;
+}
+
+.cwb.cw1 { animation: cbFadeIn .5s cubic-bezier(.22,1,.36,1) 1s forwards, floatB 5s ease-in-out 1.5s infinite; }
+.cwb.cw2 { animation: cbFadeIn .5s cubic-bezier(.22,1,.36,1) 1.3s forwards, floatB 5s ease-in-out 1.8s infinite; }
+.cwb.cw3 { animation: cbFadeIn .5s cubic-bezier(.22,1,.36,1) 1.6s forwards, floatB 5s ease-in-out 2.1s infinite; }
+
+/* Also for the old class names */
+.task-bubble.tb1 { animation: cbFadeIn .5s cubic-bezier(.22,1,.36,1) 1s forwards, floatB 5s ease-in-out 1.5s infinite; }
+.task-bubble.tb2 { animation: cbFadeIn .5s cubic-bezier(.22,1,.36,1) 1.3s forwards, floatB 5s ease-in-out 1.8s infinite; }
+.task-bubble.tb3 { animation: cbFadeIn .5s cubic-bezier(.22,1,.36,1) 1.6s forwards, floatB 5s ease-in-out 2.1s infinite; }
+
+@keyframes cbFadeIn {
+  from { opacity: 0; transform: translateY(12px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes floatB {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+/* ---- 14. macOS folder icon bob ---- */
+.macos-folder {
+  animation: folderBob 4s ease-in-out infinite;
+}
+@keyframes folderBob {
+  0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+  30%      { transform: translateX(-50%) translateY(-6px) rotate(-2deg); }
+  60%      { transform: translateX(-50%) translateY(2px) rotate(1deg); }
+}
+
+/* ---- 15. Receipt / shop images stagger reveal ---- */
+.shop-items img,
+.receipt-row img {
+  opacity: 0;
+  transform: scale(.9);
+  animation: itemPop .4s cubic-bezier(.22,1,.36,1) forwards;
+}
+.shop-items img:nth-child(1) { animation-delay: 2s; }
+.shop-items img:nth-child(2) { animation-delay: 2.2s; }
+.shop-items img:nth-child(3) { animation-delay: 2.4s; }
+.receipt-row img:nth-child(1) { animation-delay: 1.8s; }
+.receipt-row img:nth-child(2) { animation-delay: 2s; }
+.receipt-row img:nth-child(3) { animation-delay: 2.2s; }
+
+@keyframes itemPop {
+  from { opacity: 0; transform: scale(.9) translateY(4px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ---- 16. Terminal typing cursor ---- */
+.term-cmd {
+  position: relative;
+}
+.term-cmd::after {
+  content: '';
+  display: inline-block;
+  width: 1.5px;
+  height: 1em;
+  background: var(--ora);
+  margin-left: 4px;
+  vertical-align: text-bottom;
+  animation: cursorBlink 1s step-end infinite;
+}
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+/* ---- 17. Terminal "Contemplating" — animated ellipsis ---- */
+.think-dots {
+  display: inline-block;
+  min-width: 12px;
+}
+.think-dots span {
+  animation: dotBlink 1.5s step-end infinite;
+}
+.think-dots span:nth-child(2) { animation-delay: .25s; }
+.think-dots span:nth-child(3) { animation-delay: .5s; }
+
+@keyframes dotBlink {
+  0%, 100% { opacity: 1; }
+  25%      { opacity: .3; }
+}
+
+/* ---- 18. Pixel art subtle bounce ---- */
+.pixel-art {
+  animation: pixelBounce 6s ease-in-out infinite;
+}
+@keyframes pixelBounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+/* ---- 19. Card hover lift + glow ---- */
+.card {
+  transition: opacity .45s ease-out, transform .45s ease-out,
+              box-shadow .3s ease, border-color .3s ease;
+}
+.card:hover {
+  border-color: hsla(40 6% 60% / .22);
+  box-shadow: 0 8px 40px rgba(0,0,0,.25);
+}
+
+/* Office card left section stagger children */
+.office-item {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: listItemIn .4s cubic-bezier(.22,1,.36,1) forwards;
+}
+.office-item:nth-child(1) { animation-delay: .4s; }
+.office-item:nth-child(2) { animation-delay: .55s; }
+
+@keyframes listItemIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- 20. Code list items stagger ---- */
+.code-row {
+  opacity: 0;
+  transform: translateX(-8px);
+  animation: codeItemIn .35s cubic-bezier(.22,1,.36,1) forwards;
+}
+.code-row:nth-child(1) { animation-delay: 1.2s; }
+.code-row:nth-child(2) { animation-delay: 1.35s; }
+.code-row:nth-child(3) { animation-delay: 1.5s; }
+.code-row:nth-child(4) { animation-delay: 1.65s; }
+.code-row:nth-child(5) { animation-delay: 1.8s; }
+
+@keyframes codeItemIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ---- 21. Terminal window fade-in ---- */
+.term-win {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: winFadeUp .5s cubic-bezier(.22,1,.36,1) 2s forwards;
+}
+@keyframes winFadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- 22. Dot grid subtle parallax ---- */
+.cowork-grid {
+  animation: gridShift 30s linear infinite;
+}
+@keyframes gridShift {
+  from { background-position: 0 0; }
+  to   { background-position: 18px 18px; }
+}
+
+/* ---- 23. Ribbon tab active pulse ---- */
+.rtab.active {
+  animation: tabPulse 3s ease-in-out infinite;
+}
+@keyframes tabPulse {
+  0%, 100% { background: rgba(22,207,78,.08); }
+  50%      { background: rgba(22,207,78,.15); }
+}
+
+/* ---- 24. Excel cell content shimmer ---- */
+.gr-row:hover .gc {
+  color: var(--t1);
+  transition: color .2s ease;
+}
+
+/* ---- 25. Title fade after page load ---- */
+.card-title3 {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: titleFade .4s cubic-bezier(.22,1,.36,1) forwards;
+}
+.card-office .card-title3 { animation-delay: .2s; }
+.card-cowork .card-title3 { animation-delay: 1.2s; }
+.card-code .card-title3   { animation-delay: 1.2s; }
+.card-mobile .card-title3 { animation-delay: 2.2s; }
+.card-chrome .card-title3 { animation-delay: 2.2s; }
+
+@keyframes titleFade {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card-desc3 {
+  opacity: 0;
+  animation: titleFade .4s cubic-bezier(.22,1,.36,1) forwards;
+}
+.card-office .card-desc3 { animation-delay: .3s; }
+.card-cowork .card-desc3 { animation-delay: 1.3s; }
+.card-code .card-desc3   { animation-delay: 1.3s; }
+.card-mobile .card-desc3 { animation-delay: 2.3s; }
+.card-chrome .card-desc3 { animation-delay: 2.3s; }
+
+.btn-outline {
+  opacity: 0;
+  animation: titleFade .4s cubic-bezier(.22,1,.36,1) forwards;
+  animation-delay: 1.4s;
+}
+
+.btn-outline-sm {
+  opacity: 0;
+  animation: titleFade .4s cubic-bezier(.22,1,.36,1) forwards;
+}
+.btn-outline-sm { animation-delay: inherit; }
+
+/* ---- 26. Button ripple on click ---- */
+.btn-white:active::before,
+.btn-outline-sm:active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+    hsla(0 0% 50% / .2), transparent 70%);
+  animation: ripple .4s ease-out;
+  pointer-events: none;
+}
+@keyframes ripple {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
